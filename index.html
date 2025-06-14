@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,35 +9,34 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
     }
-
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #e3f2fd, #e1f5fe);
-      color: #333;
+      background: linear-gradient(to right, #0d1b2a, #1b263b);
+      color: #e0f7fa;
     }
 
     .barra-superior {
-      background: rgba(31, 81, 255, 0.85);
+      background: rgba(14, 37, 77, 0.95);
       color: #fff;
       padding: 14px 10px;
       text-align: center;
       font-size: 6vw;
       font-weight: 700;
       backdrop-filter: blur(10px);
-      text-shadow: 0 0 8px #ffffff, 0 0 15px #1F51FF;
-      box-shadow: 0 4px 10px rgba(31, 81, 255, 0.4);
+      text-shadow: 0 0 10px #4fc3f7, 0 0 20px #2196f3;
+      box-shadow: 0 4px 20px rgba(0, 140, 255, 0.3);
       animation: flotar 3s ease-in-out infinite;
     }
 
     .menu-iconos {
       display: flex;
       justify-content: space-around;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
       padding: 10px 0;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       flex-wrap: wrap;
     }
 
@@ -46,7 +44,7 @@
       flex: 1 1 20%;
       text-align: center;
       font-size: 4vw;
-      color: #1F51FF;
+      color: #90caf9;
       text-decoration: none;
       font-weight: 600;
       padding: 5px;
@@ -58,23 +56,24 @@
     }
 
     .plan {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.05);
       margin: 5vw;
       border-radius: 16px;
       padding: 5vw;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      backdrop-filter: blur(12px);
-      transition: transform 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(18px);
+      transition: transform 0.3s, background 0.3s;
     }
 
     .plan:hover {
       transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.07);
     }
 
     .titulo-plan {
       font-weight: 700;
       font-size: 5vw;
-      color: #1F51FF;
+      color: #4fc3f7;
       text-align: center;
       margin-bottom: 10px;
     }
@@ -94,16 +93,17 @@
     .datos-plan div div:first-child {
       font-size: 5vw;
       font-weight: 600;
+      color: #ffcc80;
     }
 
     .slider-container {
-      background: #1F51FF;
+      background: #0d47a1;
       border-radius: 50px;
       position: relative;
       height: 50px;
       margin-top: 15px;
       overflow: hidden;
-      box-shadow: inset 0 0 10px #ffffff40;
+      box-shadow: inset 0 0 10px #ffffff20;
       user-select: none;
     }
 
@@ -127,13 +127,13 @@
       width: 40px;
       height: 40px;
       background: #fff;
-      color: #1F51FF;
+      color: #0d47a1;
       border-radius: 50%;
       text-align: center;
       line-height: 40px;
       font-weight: bold;
       cursor: grab;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       z-index: 2;
     }
 
@@ -141,21 +141,20 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      background: rgba(255,255,255,0.95);
+      background: rgba(13, 27, 42, 0.9);
       backdrop-filter: blur(8px);
-      border-top: 1px solid #ccc;
+      border-top: 1px solid rgba(255,255,255,0.1);
       display: flex;
       justify-content: space-around;
       padding: 10px 0;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 -2px 15px rgba(0,0,0,0.2);
       z-index: 999;
       animation: flotar 4s ease-in-out infinite;
     }
 
     .menu-inferior a {
       text-decoration: none;
-      color: #1F51FF;
+      color: #4fc3f7;
       font-size: 4.5vw;
       font-weight: 500;
       text-align: center;
@@ -169,7 +168,7 @@
     }
 
     .menu-inferior a.activo {
-      color: #FF6F00;
+      color: #ffb74d;
       font-weight: 700;
     }
 
@@ -186,9 +185,7 @@
   </style>
 </head>
 <body>
-
   <div class="barra-superior">NORDEX ENERGY</div>
-
   <div class="menu-iconos">
     <a href="#"></a>
     <a href="#"></a>
@@ -199,31 +196,20 @@
 
   <div id="planes"></div>
 
-  <!-- Barra inferior mejorada -->
   <div class="menu-inferior">
-    <a href="home.html">
-      🏠<br><span>Hogar</span>
-    </a>
-    <a href="inversion.html">
-      📦<br><span>Mi inversión</span>
-    </a>
-    <a href="enlace.html" class="activo">
-      🔗<br><span>Enlace</span>
-    </a>
-    <a href="equipo.html">
-      👥<br><span>Equipo</span>
-    </a>
-    <a href="perfil.html">
-      🙋<br><span>Perfil</span>
-    </a>
+    <a href="index.html">🏠<br><span>Hogar</span></a>
+    <a href="inversión.html">📦<br><span>Mi inversión</span></a>
+    <a href="team.html" class="activo">🔗<br><span>Enlace</span></a>
+    <a href="equipo.html">👥<br><span>Equipo</span></a>
+    <a href="perfil.html">🙋<br><span>Perfil</span></a>
   </div>
 
   <script>
     const planes = [
-      { titulo: "ZERO-1", deposito: 25000, diario: "20%", dias: 50, hora: "22:45", fecha: "Jun 13th", retorno: 5000 },
-      { titulo: "ZERO-2", deposito: 50000, diario: "25%", dias: 40, hora: "10:00", fecha: "Jun 14th", retorno: 12500 },
-      { titulo: "ZERO-3", deposito: 100000, diario: "30%", dias: 30, hora: "12:00", fecha: "Jun 15th", retorno: 30000 },
-      { titulo: "ZERO-4", deposito: 200000, diario: "35%", dias: 25, hora: "16:00", fecha: "Jun 16th", retorno: 70000 }
+      { titulo: "N-250", deposito: 30000, diario: "5%", dias: 50, hora: "22:45", fecha: "Jun 13th", retorno: 1500},
+      { titulo: "N-500", deposito: 50000, diario: "5%", dias: 50, hora: "10:00", fecha: "Jun 14th", retorno: 2500 },
+      { titulo: "N-800", deposito: 100000, diario: "5%", dias: 50, hora: "12:00", fecha: "Jun 15th", retorno: 5000 },
+      { titulo: "N-1000", deposito: 200000, diario: "5%", dias: 50, hora: "16:00", fecha: "Jun 16th", retorno: 10000 }
     ];
 
     const contenedor = document.getElementById("planes");
@@ -232,8 +218,8 @@
         <div class="plan">
           <div class="titulo-plan">${p.titulo}</div>
           <div class="datos-plan">
-            <div><div style="color: #FF9800;">${p.deposito}</div><div>Depósito</div></div>
-            <div><div style="color: #f44336;">${p.diario}</div><div>Diario</div></div>
+            <div><div>$${p.deposito}</div><div>Depósito</div></div>
+            <div><div style="color:#ef9a9a;">${p.diario}</div><div>Diario</div></div>
             <div><div>${p.dias} Días</div><div>Período</div></div>
           </div>
           <div style="font-size: 3.8vw; margin: 10px 0;">
@@ -248,6 +234,9 @@
         </div>
       `;
     });
+
+    // Añade espacio extra al final para que el último botón no quede oculto
+    contenedor.innerHTML += `<div style="height: 130px;"></div>`;
 
     function startSlide(e, container) {
       e.preventDefault();
@@ -288,6 +277,5 @@
       document.addEventListener('touchend', end);
     }
   </script>
-
 </body>
 </html>
