@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Zero-G</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+    }
+
+    .barra-superior {
+      background: #1f77c7;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    /* Estilo del menú con enlaces arriba */
+    .menu-iconos {
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .menu-iconos a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .plan {
+      background: white;
+      margin: 15px;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px #ccc;
+    }
+
+    .titulo-plan {
+      font-weight: bold;
+      font-size: 18px;
+      color: #1f77c7;
+      margin-bottom: 10px;
+    }
+
+    .datos-plan {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+
+    .datos-plan div {
+      text-align: center;
+    }
+
+    .boton-invertir {
+      background: orange;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Menú inferior con enlaces */
+    .menu-inferior {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .menu-inferior a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .menu-inferior .enlace {
+      color: #1f77c7;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Parte superior con el logo -->
+  <div class="barra-superior">
+    zero-G
+  </div>
+
+  <!-- Menú de navegación superior con enlaces -->
+  <div class="menu-iconos">
+    <a href="#">Ingreso</a>
+    <a href="#">Retirar</a>
+    <a href="#">Acerca de</a>
+    <a href="#">CSD</a>
+  </div>
+
+  <!-- Sección del plan de inversión -->
+  <div class="plan">
+    <div class="titulo-plan">ZERO-1</div>
+
+    <!-- Datos del plan -->
+    <div class="datos-plan">
+      <div>
+        <div style="font-size: 20px; color: orange;">25000</div>
+        <div>Depósito</div>
+      </div>
+      <div>
+        <div style="font-size: 20px; color: red;">20%</div>
+        <div>A diario</div>
+      </div>
+      <div>
+        <div style="font-size: 18px; font-weight: bold;">50 Días</div>
+        <div>Período</div>
+      </div>
+    </div>
+
+    <!-- Más información -->
+    <div style="font-size: 14px; margin: 10px 0;">
+      <b>Comprar:</b> Empieza en 22:45 Jun 13th<br>
+      <b>Tiempo de liquidación:</b> A diario 22:45 pm<br>
+      <b>Retorno diario:</b> 5000 ($)
+    </div>
+
+    <!-- Botón -->
+    <div class="boton-invertir">Invierta ahora</div>
+  </div>
+
+  <!-- Menú inferior con enlaces -->
+  <div class="menu-inferior">
+    <a href="#">Hogar</a>
+    <a href="#">Mi inversión</a>
+    <a href="#" class="enlace">Enlace</a>
+    <a href="#">Equipo</a>
+    <a href="#">Perfil</a>
+  </div>
+
+</body>
+</html>
