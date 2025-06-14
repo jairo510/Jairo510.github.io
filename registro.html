@@ -1,221 +1,660 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login y Registro</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nordex - Portal de Empleados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #e0f7fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4CAF50 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow-x: hidden;
     }
+
+    /* Animación de turbinas de viento en el fondo */
+    .wind-turbines {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.1;
+    }
+
+    .turbine {
+        position: absolute;
+        width: 60px;
+        height: 120px;
+        background: white;
+        border-radius: 50px;
+        animation: rotate 6s linear infinite;
+    }
+
+    .turbine:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+    .turbine:nth-child(2) { top: 40%; right: 15%; animation-delay: 2s; }
+    .turbine:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
     .container {
-      background-color: #ffffff;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 450px;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 10;
+        position: relative;
     }
+
+    .nordex-logo {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .nordex-logo h1 {
+        color: #1e3c72;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nordex-logo p {
+        color: #4CAF50;
+        font-size: 1rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .form-container {
+        display: none;
+    }
+
+    .form-container.active {
+        display: block;
+        animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
     h2 {
-      text-align: center;
-      color: #00796b;
-      margin-bottom: 1rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #1e3c72;
+        font-size: 1.8rem;
+        font-weight: 600;
     }
-    .input-group {
-      position: relative;
-      margin-bottom: 1.5rem;
+
+    .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
     }
-    .input-group input {
-      width: 100%;
-      padding: 1rem 0.75rem 0.25rem;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 1rem;
-      background: white;
-      outline: none;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #1e3c72;
+        font-weight: 600;
+        font-size: 0.9rem;
     }
-    .input-group label {
-      position: absolute;
-      top: 1rem;
-      left: 0.75rem;
-      color: #999;
-      font-size: 1rem;
-      pointer-events: none;
-      transition: 0.2s ease all;
-      background-color: white;
-      padding: 0 0.2rem;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
     }
-    .input-group input:focus + label,
-    .input-group input:not(:placeholder-shown) + label {
-      top: 0.4rem;
-      font-size: 0.75rem;
-      color: #00796b;
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    select:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        transform: translateY(-2px);
     }
-    .phone-prefix {
-      display: flex;
+
+    .btn {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
     }
-    .phone-prefix span {
-      padding: 1rem 0.75rem;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-right: none;
-      border-radius: 10px 0 0 10px;
-      font-weight: bold;
-      color: #00796b;
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
     }
-    .phone-prefix input {
-      border-radius: 0 10px 10px 0;
-      border-left: none;
+
+    .btn:active {
+        transform: translateY(-1px);
     }
-    button {
-      width: 100%;
-      padding: 0.85rem;
-      background-color: #00796b;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
+
+    .switch-form {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #666;
     }
-    button:hover {
-      background-color: #00695c;
+
+    .switch-form a {
+        color: #1e3c72;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
     }
-    .switch-link {
-      text-align: center;
-      margin-top: 1rem;
-      color: #00796b;
-      cursor: pointer;
-      font-size: 0.95rem;
+
+    .switch-form a:hover {
+        color: #4CAF50;
+        text-decoration: underline;
     }
+
     .error {
-      color: red;
-      text-align: center;
-      margin-bottom: 1rem;
-      display: none;
+        color: #e74c3c;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        display: none;
+        background: rgba(231, 76, 60, 0.1);
+        padding: 0.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #e74c3c;
     }
-  </style>
+
+    .success {
+        color: #27ae60;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        display: none;
+        background: rgba(39, 174, 96, 0.1);
+        padding: 0.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #27ae60;
+    }
+
+    /* Home Page Styles */
+    .home-container {
+        display: none;
+        text-align: center;
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        max-width: 600px;
+        width: 100%;
+        z-index: 10;
+        position: relative;
+    }
+
+    .home-container.active {
+        display: block;
+        animation: fadeIn 0.6s ease;
+    }
+
+    .welcome-message {
+        font-size: 2.5rem;
+        color: #1e3c72;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .user-info {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 2rem 0;
+        border-left: 5px solid #4CAF50;
+    }
+
+    .user-info h3 {
+        color: #1e3c72;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+    }
+
+    .user-info p {
+        color: #666;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    .stat-card h4 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    .logout-btn {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+
+    .logout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+    }
+
+    .wind-icon {
+        font-size: 3rem;
+        color: #4CAF50;
+        margin-bottom: 1rem;
+        animation: spin 10s linear infinite;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+        .container, .home-container {
+            margin: 1rem;
+            padding: 1.5rem;
+        }
+        
+        .dashboard-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+```
+
 </head>
 <body>
-  <div class="container">
-    <div id="formRegistro">
-      <h2>Registro</h2>
-      <div class="error" id="errorRegistro"></div>
-      <div class="input-group phone-prefix">
-        <span>+57</span>
-        <input type="text" id="regTelefono" placeholder=" " required>
-        <label for="regTelefono">Número de teléfono</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="regPassword" placeholder=" " required>
-        <label for="regPassword">Contraseña</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="regConfirmar" placeholder=" " required>
-        <label for="regConfirmar">Confirmar contraseña</label>
-      </div>
-      <div class="input-group">
-        <input type="text" id="regCodigo" placeholder=" " required>
-        <label for="regCodigo">Código de invitación</label>
-      </div>
-      <button onclick="registrar()">Registrarse</button>
-      <div class="switch-link" onclick="mostrarLogin()">¿Ya tienes cuenta? Inicia sesión</div>
+    <!-- Turbinas de viento animadas de fondo -->
+    <div class="wind-turbines">
+        <div class="turbine"></div>
+        <div class="turbine"></div>
+        <div class="turbine"></div>
     </div>
 
-    <div id="formLogin" style="display:none">
-      <h2>Iniciar Sesión</h2>
-      <div class="error" id="errorLogin"></div>
-      <div class="input-group phone-prefix">
-        <span>+57</span>
-        <input type="text" id="loginTelefono" placeholder=" " required>
-        <label for="loginTelefono">Número de teléfono</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="loginPassword" placeholder=" " required>
-        <label for="loginPassword">Contraseña</label>
-      </div>
-      <button onclick="iniciarSesion()">Entrar</button>
-      <div class="switch-link" onclick="mostrarRegistro()">¿No tienes cuenta? Regístrate</div>
+```
+<div class="container">
+    <!-- Logo de Nordex -->
+    <div class="nordex-logo">
+        <h1>NORDEX</h1>
+        <p>Energía Eólica Sostenible</p>
     </div>
-  </div>
 
-  <script>
-    function mostrarLogin() {
-      document.getElementById('formRegistro').style.display = 'none';
-      document.getElementById('formLogin').style.display = 'block';
+    <!-- Formulario de Inicio de Sesión -->
+    <div id="loginForm" class="form-container active">
+        <h2>Acceso de Empleados</h2>
+        <form id="loginFormElement">
+            <div class="form-group">
+                <label for="loginEmail">📧 Email Corporativo:</label>
+                <input type="email" id="loginEmail" name="email" placeholder="nombre@nordex.com" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">🔒 Contraseña:</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Tu contraseña segura" required>
+            </div>
+            <button type="submit" class="btn">🌪️ Iniciar Sesión</button>
+            <div id="loginError" class="error"></div>
+            <div id="loginSuccess" class="success"></div>
+        </form>
+        <div class="switch-form">
+            <p>¿Nuevo empleado? <a href="#" onclick="showRegister()">Registra tu cuenta aquí</a></p>
+        </div>
+    </div>
+
+    <!-- Formulario de Registro -->
+    <div id="registerForm" class="form-container">
+        <h2>Registro de Empleado</h2>
+        <form id="registerFormElement">
+            <div class="form-group">
+                <label for="registerName">👤 Nombre Completo:</label>
+                <input type="text" id="registerName" name="name" placeholder="Tu nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">📧 Email Corporativo:</label>
+                <input type="email" id="registerEmail" name="email" placeholder="nombre@nordex.com" required>
+            </div>
+            <div class="form-group">
+                <label for="employeeId">🆔 ID de Empleado:</label>
+                <input type="text" id="employeeId" name="employeeId" placeholder="NX-2024-001" required>
+            </div>
+            <div class="form-group">
+                <label for="department">🏢 Departamento:</label>
+                <select id="department" name="department" required>
+                    <option value="">Selecciona tu departamento</option>
+                    <option value="engineering">Ingeniería</option>
+                    <option value="maintenance">Mantenimiento</option>
+                    <option value="operations">Operaciones</option>
+                    <option value="sales">Ventas</option>
+                    <option value="administration">Administración</option>
+                    <option value="rnd">I+D</option>
+                    <option value="quality">Control de Calidad</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">🔒 Contraseña:</label>
+                <input type="password" id="registerPassword" name="password" placeholder="Mínimo 8 caracteres" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">🔒 Confirmar Contraseña:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repite tu contraseña" required>
+            </div>
+            <button type="submit" class="btn">🌱 Registrar Cuenta</button>
+            <div id="registerError" class="error"></div>
+            <div id="registerSuccess" class="success"></div>
+        </form>
+        <div class="switch-form">
+            <p>¿Ya tienes cuenta? <a href="#" onclick="showLogin()">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Página Home -->
+<div id="homePage" class="home-container">
+    <div class="wind-icon">🌪️</div>
+    <h1 class="welcome-message">¡Bienvenido a Nordex!</h1>
+    <div id="userInfo" class="user-info"></div>
+    
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <h4>1,247</h4>
+            <p>Turbinas Activas</p>
+        </div>
+        <div class="stat-card">
+            <h4>3.2 GW</h4>
+            <p>Energía Generada</p>
+        </div>
+        <div class="stat-card">
+            <h4>98.5%</h4>
+            <p>Disponibilidad</p>
+        </div>
+    </div>
+    
+    <button class="logout-btn" onclick="logout()">🚪 Cerrar Sesión</button>
+</div>
+
+<script>
+    // Datos de usuarios almacenados en memoria
+    let users = [];
+    let currentUser = null;
+
+    // Departamentos con sus nombres completos
+    const departments = {
+        'engineering': 'Ingeniería',
+        'maintenance': 'Mantenimiento',
+        'operations': 'Operaciones',
+        'sales': 'Ventas',
+        'administration': 'Administración',
+        'rnd': 'Investigación y Desarrollo',
+        'quality': 'Control de Calidad'
+    };
+
+    // Funciones para cambiar entre formularios
+    function showLogin() {
+        document.getElementById('loginForm').classList.add('active');
+        document.getElementById('registerForm').classList.remove('active');
+        clearMessages();
     }
 
-    function mostrarRegistro() {
-      document.getElementById('formLogin').style.display = 'none';
-      document.getElementById('formRegistro').style.display = 'block';
+    function showRegister() {
+        document.getElementById('registerForm').classList.add('active');
+        document.getElementById('loginForm').classList.remove('active');
+        clearMessages();
     }
 
-    function getUsuarios() {
-      const data = localStorage.getItem('usuarios');
-      return data ? JSON.parse(data) : [];
+    function showHome() {
+        document.querySelector('.container').style.display = 'none';
+        document.getElementById('homePage').classList.add('active');
+        document.getElementById('userInfo').innerHTML = `
+            <h3>Información del Empleado</h3>
+            <p><strong>Nombre:</strong> ${currentUser.name}</p>
+            <p><strong>Email:</strong> ${currentUser.email}</p>
+            <p><strong>ID Empleado:</strong> ${currentUser.employeeId}</p>
+            <p><strong>Departamento:</strong> ${departments[currentUser.department]}</p>
+            <p><strong>Fecha de Registro:</strong> ${currentUser.registrationDate}</p>
+        `;
     }
 
-    function setUsuarios(usuarios) {
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    function clearMessages() {
+        document.querySelectorAll('.error, .success').forEach(el => {
+            el.style.display = 'none';
+            el.textContent = '';
+        });
     }
 
-    function registrar() {
-      const tel = document.getElementById('regTelefono').value.trim();
-      const pass = document.getElementById('regPassword').value;
-      const conf = document.getElementById('regConfirmar').value;
-      const codigo = document.getElementById('regCodigo').value.trim();
-
-      if (pass !== conf) {
-        mostrarError('errorRegistro', "Las contraseñas no coinciden");
-        return;
-      }
-
-      const usuarios = getUsuarios();
-
-      const existe = usuarios.find(u => u.telefono === tel);
-      if (existe) {
-        mostrarError('errorRegistro', "Este número ya está registrado");
-        return;
-      }
-
-      usuarios.push({ telefono: tel, password: pass, codigo });
-      setUsuarios(usuarios);
-
-      alert("Registro exitoso");
-      window.location.href = "home.html";
+    function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
     }
 
-    function iniciarSesion() {
-      const tel = document.getElementById('loginTelefono').value.trim();
-      const pass = document.getElementById('loginPassword').value;
-
-      const usuarios = getUsuarios();
-      const user = usuarios.find(u => u.telefono === tel && u.password === pass);
-
-      if (user) {
-        ocultarError('errorLogin');
-        window.location.href = "home.html";
-      } else {
-        mostrarError('errorLogin', "Credenciales incorrectas");
-      }
+    function showSuccess(elementId, message) {
+        const successElement = document.getElementById(elementId);
+        successElement.textContent = message;
+        successElement.style.display = 'block';
     }
 
-    function mostrarError(id, mensaje) {
-      const el = document.getElementById(id);
-      el.textContent = mensaje;
-      el.style.display = 'block';
+    // Validación de email corporativo
+    function isValidNordexEmail(email) {
+        const emailRegex = /^[^\s@]+@nordex\.com$/i;
+        return emailRegex.test(email);
     }
 
-    function ocultarError(id) {
-      const el = document.getElementById(id);
-      el.style.display = 'none';
+    // Validación de ID de empleado
+    function isValidEmployeeId(id) {
+        const idRegex = /^NX-\d{4}-\d{3,4}$/;
+        return idRegex.test(id);
     }
-  </script>
+
+    // Manejo del formulario de registro
+    document.getElementById('registerFormElement').addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearMessages();
+
+        const name = document.getElementById('registerName').value.trim();
+        const email = document.getElementById('registerEmail').value.trim();
+        const employeeId = document.getElementById('employeeId').value.trim();
+        const department = document.getElementById('department').value;
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Validaciones
+        if (!name) {
+            showError('registerError', 'Por favor ingresa tu nombre completo');
+            return;
+        }
+
+        if (!isValidNordexEmail(email)) {
+            showError('registerError', 'Debes usar tu email corporativo de Nordex (@nordex.com)');
+            return;
+        }
+
+        if (!isValidEmployeeId(employeeId)) {
+            showError('registerError', 'El ID de empleado debe tener el formato: NX-YYYY-###');
+            return;
+        }
+
+        if (!department) {
+            showError('registerError', 'Por favor selecciona tu departamento');
+            return;
+        }
+
+        if (password.length < 8) {
+            showError('registerError', 'La contraseña debe tener al menos 8 caracteres');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showError('registerError', 'Las contraseñas no coinciden');
+            return;
+        }
+
+        // Verificar si el usuario ya existe
+        if (users.find(user => user.email === email)) {
+            showError('registerError', 'Este email ya está registrado');
+            return;
+        }
+
+        if (users.find(user => user.employeeId === employeeId)) {
+            showError('registerError', 'Este ID de empleado ya está registrado');
+            return;
+        }
+
+        // Crear nuevo usuario
+        const newUser = {
+            name: name,
+            email: email,
+            employeeId: employeeId,
+            department: department,
+            password: password,
+            registrationDate: new Date().toLocaleDateString()
+        };
+
+        users.push(newUser);
+        currentUser = newUser;
+
+        showSuccess('registerSuccess', '¡Registro exitoso! Bienvenido al equipo Nordex. Redirigiendo...');
+        
+        // Simular redirección a home.html
+        setTimeout(() => {
+            showHome();
+        }, 2000);
+    });
+
+    // Manejo del formulario de inicio de sesión
+    document.getElementById('loginFormElement').addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearMessages();
+
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        // Validaciones
+        if (!isValidNordexEmail(email)) {
+            showError('loginError', 'Debes usar tu email corporativo de Nordex (@nordex.com)');
+            return;
+        }
+
+        if (!password) {
+            showError('loginError', 'Por favor ingresa tu contraseña');
+            return;
+        }
+
+        // Buscar usuario
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (!user) {
+            showError('loginError', 'Credenciales incorrectas. Verifica tu email y contraseña.');
+            return;
+        }
+
+        currentUser = user;
+        showSuccess('loginSuccess', `¡Bienvenido de vuelta, ${user.name}! Accediendo al sistema...`);
+
+        // Simular redirección a home.html
+        setTimeout(() => {
+            showHome();
+        }, 1500);
+    });
+
+    // Función de cerrar sesión
+    function logout() {
+        currentUser = null;
+        document.getElementById('homePage').classList.remove('active');
+        document.querySelector('.container').style.display = 'block';
+        showLogin();
+        
+        // Limpiar formularios
+        document.getElementById('loginFormElement').reset();
+        document.getElementById('registerFormElement').reset();
+    }
+
+    // Datos de prueba - Empleado demo de Nordex
+    users.push({
+        name: 'Ana García Rodríguez',
+        email: 'ana.garcia@nordex.com',
+        employeeId: 'NX-2024-001',
+        department: 'engineering',
+        password: 'nordex2024',
+        registrationDate: new Date().toLocaleDateString()
+    });
+
+    users.push({
+        name: 'Carlos Mendoza López',
+        email: 'carlos.mendoza@nordex.com',
+        employeeId: 'NX-2024-002',
+        department: 'maintenance',
+        password: 'windpower',
+        registrationDate: new Date().toLocaleDateString()
+    });
+</script>
+```
+
 </body>
 </html>
