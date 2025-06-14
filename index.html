@@ -1,68 +1,293 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Primera Página</title>
-
-  <!-- Esto es una hoja de estilos interna para cambiar colores y fuentes -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NORDEX ENERGY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      color: #333;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      background: linear-gradient(to right, #e3f2fd, #e1f5fe);
+      color: #333;
     }
 
-    header {
-      background-color: #4CAF50;
+    .barra-superior {
+      background: rgba(31, 81, 255, 0.85);
+      color: #fff;
+      padding: 14px 10px;
+      text-align: center;
+      font-size: 6vw;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+      text-shadow: 0 0 8px #ffffff, 0 0 15px #1F51FF;
+      box-shadow: 0 4px 10px rgba(31, 81, 255, 0.4);
+      animation: flotar 3s ease-in-out infinite;
+    }
+
+    .menu-iconos {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+      flex-wrap: wrap;
+    }
+
+    .menu-iconos a {
+      flex: 1 1 20%;
+      text-align: center;
+      font-size: 4vw;
+      color: #1F51FF;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 5px;
+      transition: transform 0.2s;
+    }
+
+    .menu-iconos a:hover {
+      transform: scale(1.1);
+    }
+
+    .plan {
+      background: rgba(255, 255, 255, 0.9);
+      margin: 5vw;
+      border-radius: 16px;
+      padding: 5vw;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s;
+    }
+
+    .plan:hover {
+      transform: translateY(-6px);
+    }
+
+    .titulo-plan {
+      font-weight: 700;
+      font-size: 5vw;
+      color: #1F51FF;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .datos-plan {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .datos-plan div {
+      text-align: center;
+      flex: 1 1 30%;
+    }
+
+    .datos-plan div div:first-child {
+      font-size: 5vw;
+      font-weight: 600;
+    }
+
+    .slider-container {
+      background: #1F51FF;
+      border-radius: 50px;
+      position: relative;
+      height: 50px;
+      margin-top: 15px;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px #ffffff40;
+      user-select: none;
+    }
+
+    .slider-text {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 50px;
       color: white;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
+      font-weight: 600;
+      font-size: 4vw;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    main {
-      margin-top: 20px;
+    .slider-button {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      color: #1F51FF;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      font-weight: bold;
+      cursor: grab;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 2;
     }
 
-    footer {
-      margin-top: 40px;
-      font-size: 0.8em;
+    .menu-inferior {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      font-family: 'Poppins', sans-serif;
+      z-index: 999;
+      animation: flotar 4s ease-in-out infinite;
+    }
+
+    .menu-inferior a {
+      text-decoration: none;
+      color: #1F51FF;
+      font-size: 4.5vw;
+      font-weight: 500;
       text-align: center;
-      color: gray;
+      flex: 1;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .menu-inferior a span {
+      display: block;
+      font-size: 3.5vw;
+    }
+
+    .menu-inferior a.activo {
+      color: #FF6F00;
+      font-weight: 700;
+    }
+
+    .menu-inferior a:active {
+      transform: scale(1.1);
+    }
+
+    @media (min-width: 600px) {
+      .barra-superior { font-size: 26px; }
+      .menu-iconos a, .menu-inferior a { font-size: 16px; }
+      .titulo-plan { font-size: 22px; }
+      .slider-text { font-size: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Encabezado principal -->
-  <header>
-    <h1>Hola, soy Andrés 👋</h1>
-    <p>Esta es mi primera página con GitHub Pages</p>
-  </header>
+  <div class="barra-superior">NORDEX ENERGY</div>
 
-  <!-- Contenido principal -->
-  <main>
-    <h2>¿Qué es esto?</h2>
-    <p>Es una página HTML muy simple para aprender a usar GitHub Pages.</p>
+  <div class="menu-iconos">
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+  </div>
 
-    <h2>¿Cómo la hice?</h2>
-    <ul>
-      <li>Creé un repositorio en GitHub llamado <code>jairo510.github.io</code></li>
-      <li>Agregué este archivo <code>index.html</code></li>
-      <li>Activé GitHub Pages desde la configuración del repositorio</li>
-      <li>Y listo ✨</li>
-    </ul>
+  <div id="planes"></div>
 
-    <h2>¿Qué sigue?</h2>
-    <p>Puedes seguir practicando con más HTML, CSS o incluso JavaScript.</p>
-  </main>
-  <!-- Pie de página -->
-  <footer>
-    <p>Hecho con ❤️ por Andrés</p>
-  </footer>
+  <!-- Barra inferior mejorada -->
+  <div class="menu-inferior">
+    <a href="home.html">
+      🏠<br><span>Hogar</span>
+    </a>
+    <a href="inversion.html">
+      📦<br><span>Mi inversión</span>
+    </a>
+    <a href="enlace.html" class="activo">
+      🔗<br><span>Enlace</span>
+    </a>
+    <a href="equipo.html">
+      👥<br><span>Equipo</span>
+    </a>
+    <a href="perfil.html">
+      🙋<br><span>Perfil</span>
+    </a>
+  </div>
+
+  <script>
+    const planes = [
+      { titulo: "ZERO-1", deposito: 25000, diario: "20%", dias: 50, hora: "22:45", fecha: "Jun 13th", retorno: 5000 },
+      { titulo: "ZERO-2", deposito: 50000, diario: "25%", dias: 40, hora: "10:00", fecha: "Jun 14th", retorno: 12500 },
+      { titulo: "ZERO-3", deposito: 100000, diario: "30%", dias: 30, hora: "12:00", fecha: "Jun 15th", retorno: 30000 },
+      { titulo: "ZERO-4", deposito: 200000, diario: "35%", dias: 25, hora: "16:00", fecha: "Jun 16th", retorno: 70000 }
+    ];
+
+    const contenedor = document.getElementById("planes");
+    planes.forEach(p => {
+      contenedor.innerHTML += `
+        <div class="plan">
+          <div class="titulo-plan">${p.titulo}</div>
+          <div class="datos-plan">
+            <div><div style="color: #FF9800;">${p.deposito}</div><div>Depósito</div></div>
+            <div><div style="color: #f44336;">${p.diario}</div><div>Diario</div></div>
+            <div><div>${p.dias} Días</div><div>Período</div></div>
+          </div>
+          <div style="font-size: 3.8vw; margin: 10px 0;">
+            <b>Comprar:</b> ${p.hora} ${p.fecha}<br>
+            <b>Liquidación:</b> Diario ${p.hora}<br>
+            <b>Retorno diario:</b> $${p.retorno}
+          </div>
+          <div class="slider-container" ontouchstart="startSlide(event, this)" onmousedown="startSlide(event, this)">
+            <div class="slider-text">Deslice para invertir</div>
+            <div class="slider-button">▶</div>
+          </div>
+        </div>
+      `;
+    });
+
+    function startSlide(e, container) {
+      e.preventDefault();
+      const button = container.querySelector('.slider-button');
+      const max = container.offsetWidth - button.offsetWidth;
+      let startX = (e.touches ? e.touches[0].clientX : e.clientX) - button.offsetLeft;
+
+      function move(ev) {
+        let x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - startX;
+        x = Math.max(0, Math.min(x, max));
+        button.style.left = x + "px";
+        if (x >= max) {
+          cleanup();
+          setTimeout(() => {
+            alert("✅ ¡Inversión exitosa!");
+            button.style.left = "5px";
+          }, 150);
+        }
+      }
+
+      function end() {
+        if (parseInt(button.style.left) < max) {
+          button.style.left = "5px";
+        }
+        cleanup();
+      }
+
+      function cleanup() {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', end);
+        document.removeEventListener('touchmove', move);
+        document.removeEventListener('touchend', end);
+      }
+
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', end);
+      document.addEventListener('touchmove', move);
+      document.addEventListener('touchend', end);
+    }
+  </script>
 
 </body>
 </html>
