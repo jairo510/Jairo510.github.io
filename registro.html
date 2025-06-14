@@ -134,14 +134,15 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('regPassword').value;
 
-      if (localStorage.getItem(phone)) {alert('Este número ya está registrado');
+      if (localStorage.getItem(phone)) {
+        alert('Este número ya está registrado');
         return false;
       }
 
       const user = { name, phone, email, password };
       localStorage.setItem(phone, JSON.stringify(user));
       alert('Registro exitoso');
-      window.location.href = "home.html"; // Redirección después de registro
+      window.location.href = "index.html"; // Redirección después de registro
       return false;
     }
 
@@ -163,7 +164,7 @@
       }
 
       alert('Bienvenido ' + user.name);
-      window.location.href = "home.html"; // Redirección después de login
+      window.location.href = "index.html"; // Redirección después de login
       return false;
     }
   </script>
