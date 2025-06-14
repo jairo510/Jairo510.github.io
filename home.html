@@ -4,114 +4,136 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NORDEX ENERGY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     @keyframes flotar {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f7f7f7;
+      background: linear-gradient(to right, #e3f2fd, #e1f5fe);
+      color: #333;
     }
 
     .barra-superior {
-      background: #1F51FF;
-      color: white;
-      padding: 10px;
+      background: rgba(31, 81, 255, 0.85);
+      color: #fff;
+      padding: 14px 10px;
       text-align: center;
       font-size: 6vw;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
       text-shadow: 0 0 8px #ffffff, 0 0 15px #1F51FF;
-      box-shadow: 0 0 12px #1F51FF;
-      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(31, 81, 255, 0.4);
       animation: flotar 3s ease-in-out infinite;
     }
 
     .menu-iconos {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-around;
-      background: white;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
       padding: 10px 0;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #ccc;
+      flex-wrap: wrap;
     }
 
     .menu-iconos a {
-      text-decoration: none;
-      color: black;
-      font-size: 4vw;
+      flex: 1 1 20%;
       text-align: center;
-      flex: 1 1 25%;
-      padding: 5px 0;
+      font-size: 4vw;
+      color: #1F51FF;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 5px;
+      transition: transform 0.2s;
+    }
+
+    .menu-iconos a:hover {
+      transform: scale(1.1);
     }
 
     .plan {
-      background: white;
-      margin: 4vw;
-      border-radius: 10px;
-      padding: 4vw;
-      box-shadow: 0 0 10px #ccc;
+      background: rgba(255, 255, 255, 0.9);
+      margin: 5vw;
+      border-radius: 16px;
+      padding: 5vw;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s;
+    }
+
+    .plan:hover {
+      transform: translateY(-6px);
     }
 
     .titulo-plan {
-      font-weight: bold;
+      font-weight: 700;
       font-size: 5vw;
-      color: #1f77c7;
-      margin-bottom: 10px;
+      color: #1F51FF;
       text-align: center;
+      margin-bottom: 10px;
     }
 
     .datos-plan {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-around;
-      margin: 10px 0;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
     .datos-plan div {
       text-align: center;
       flex: 1 1 30%;
-      margin: 5px 0;
+    }
+
+    .datos-plan div div:first-child {
+      font-size: 5vw;
+      font-weight: 600;
     }
 
     .slider-container {
+      background: #1F51FF;
+      border-radius: 50px;
       position: relative;
-      background-color: #7ec8e3;
-      border-radius: 10px;
-      height: 45px;
-      user-select: none;
-      overflow: hidden;
+      height: 50px;
       margin-top: 15px;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px #ffffff40;
+      user-select: none;
     }
 
     .slider-text {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 50px;
       color: white;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 4vw;
       z-index: 1;
       pointer-events: none;
-      font-size: 4vw;
     }
 
     .slider-button {
       position: absolute;
-      top: 2px;
-      left: 2px;
+      top: 5px;
+      left: 5px;
       width: 40px;
       height: 40px;
-      background-color: white;
-      color: #7ec8e3;
-      border-radius: 8px;
-      font-weight: bold;
+      background: #fff;
+      color: #1F51FF;
+      border-radius: 50%;
       text-align: center;
       line-height: 40px;
+      font-weight: bold;
       cursor: grab;
-      transition: left 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       z-index: 2;
     }
 
@@ -119,34 +141,33 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      background: white;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
       border-top: 1px solid #ccc;
       display: flex;
       justify-content: space-around;
-      padding: 10px 0;
+      padding: 12px 0;
       animation: flotar 4s ease-in-out infinite;
-      flex-wrap: wrap;
     }
 
     .menu-inferior a {
       text-decoration: none;
-      color: black;
+      color: #1F51FF;
       font-size: 4vw;
+      font-weight: 600;
       text-align: center;
       flex: 1 1 20%;
     }
 
     .menu-inferior .enlace {
-      color: #7ec8e3;
-      font-weight: bold;
+      color: #FF6F00;
     }
 
     @media (min-width: 600px) {
-      .barra-superior { font-size: 24px; }
-      .menu-iconos a,
-      .menu-inferior a { font-size: 14px; }
-      .titulo-plan { font-size: 18px; }
-      .slider-text { font-size: 14px; }
+      .barra-superior { font-size: 26px; }
+      .menu-iconos a, .menu-inferior a { font-size: 16px; }
+      .titulo-plan { font-size: 22px; }
+      .slider-text { font-size: 16px; }
     }
   </style>
 </head>
@@ -155,21 +176,21 @@
   <div class="barra-superior">NORDEX ENERGY</div>
 
   <div class="menu-iconos">
-    <a href="#">Perfil.html</a>
-    <a href="#">Ingreso</a>
-    <a href="#">Retirar</a>
-    <a href="#">Acerca de</a>
-    <a href="#">CSD</a>
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
   </div>
 
   <div id="planes"></div>
 
   <div class="menu-inferior">
-    <a href="#">Hogar</a>
+    <a href="home.html">Hogar</a>
     <a href="#">Mi inversión</a>
     <a href="#" class="enlace">Enlace</a>
     <a href="#">Equipo</a>
-    <a href="perfil.html">Perfil</a> <!-- ✔️ Aquí se redirige correctamente -->
+    <a href="perfil.html">Perfil</a>
   </div>
 
   <script>
@@ -186,14 +207,14 @@
         <div class="plan">
           <div class="titulo-plan">${p.titulo}</div>
           <div class="datos-plan">
-            <div><div style="font-size: 5vw; color: orange;">${p.deposito}</div><div>Depósito</div></div>
-            <div><div style="font-size: 5vw; color: red;">${p.diario}</div><div>A diario</div></div>
-            <div><div style="font-size: 4.5vw; font-weight: bold;">${p.dias} Días</div><div>Período</div></div>
+            <div><div style="color: #FF9800;">${p.deposito}</div><div>Depósito</div></div>
+            <div><div style="color: #f44336;">${p.diario}</div><div>Diario</div></div>
+            <div><div>${p.dias} Días</div><div>Período</div></div>
           </div>
           <div style="font-size: 3.8vw; margin: 10px 0;">
-            <b>Comprar:</b> Empieza en ${p.hora} ${p.fecha}<br>
-            <b>Liquidación:</b> Diario ${p.hora} pm<br>
-            <b>Retorno diario:</b> ${p.retorno} ($)
+            <b>Comprar:</b> ${p.hora} ${p.fecha}<br>
+            <b>Liquidación:</b> Diario ${p.hora}<br>
+            <b>Retorno diario:</b> $${p.retorno}
           </div>
           <div class="slider-container" ontouchstart="startSlide(event, this)" onmousedown="startSlide(event, this)">
             <div class="slider-text">Deslice para invertir</div>
@@ -217,14 +238,14 @@
           cleanup();
           setTimeout(() => {
             alert("✅ ¡Inversión exitosa!");
-            button.style.left = "2px";
+            button.style.left = "5px";
           }, 150);
         }
       }
 
       function end() {
         if (parseInt(button.style.left) < max) {
-          button.style.left = "2px";
+          button.style.left = "5px";
         }
         cleanup();
       }
