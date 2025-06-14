@@ -3,192 +3,244 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login y Registro</title>
+  <title>NORDEX ENERGY</title>
   <style>
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #e0f7fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
       margin: 0;
+      padding: 0;
+      background: #f7f7f7;
     }
-    .container {
-      background-color: #ffffff;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-    h2 {
-      text-align: center;
-      color: #00796b;
-      margin-bottom: 1rem;
-    }
-    .input-group {
-      position: relative;
-      margin-bottom: 1.5rem;
-    }
-    .input-group input {
-      width: 100%;
-      padding: 1rem 0.75rem 0.25rem;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 1rem;
-      background: white;
-      outline: none;
-    }
-    .input-group label {
-      position: absolute;
-      top: 1rem;
-      left: 0.75rem;
-      color: #999;
-      font-size: 1rem;
-      pointer-events: none;
-      transition: 0.2s ease all;
-      background-color: white;
-      padding: 0 0.2rem;
-    }
-    .input-group input:focus + label,
-    .input-group input:not(:placeholder-shown) + label {
-      top: 0.4rem;
-      font-size: 0.75rem;
-      color: #00796b;
-    }
-    .phone-prefix {
-      display: flex;
-    }
-    .phone-prefix span {
-      padding: 1rem 0.75rem;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-right: none;
-      border-radius: 10px 0 0 10px;
-      font-weight: bold;
-      color: #00796b;
-    }
-    .phone-prefix input {
-      border-radius: 0 10px 10px 0;
-      border-left: none;
-    }
-    button {
-      width: 100%;
-      padding: 0.85rem;
-      background-color: #00796b;
+
+    .barra-superior {
+      background: #1F51FF;
       color: white;
-      border: none;
+      padding: 10px;
+      text-align: center;
+      font-size: 6vw;
+      text-shadow: 0 0 8px #ffffff, 0 0 15px #1F51FF;
+      box-shadow: 0 0 12px #1F51FF;
+      font-weight: bold;
+      animation: flotar 3s ease-in-out infinite;
+    }
+
+    .menu-iconos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background: white;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .menu-iconos a {
+      text-decoration: none;
+      color: black;
+      font-size: 4vw;
+      text-align: center;
+      flex: 1 1 25%;
+      padding: 5px 0;
+    }
+
+    .plan {
+      background: white;
+      margin: 4vw;
       border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
+      padding: 4vw;
+      box-shadow: 0 0 10px #ccc;
     }
-    button:hover {
-      background-color: #00695c;
-    }
-    .switch-link {
+
+    .titulo-plan {
+      font-weight: bold;
+      font-size: 5vw;
+      color: #1f77c7;
+      margin-bottom: 10px;
       text-align: center;
-      margin-top: 1rem;
-      color: #00796b;
-      cursor: pointer;
-      font-size: 0.95rem;
     }
-    .error {
-      color: red;
+
+    .datos-plan {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 10px 0;
+    }
+
+    .datos-plan div {
       text-align: center;
-      margin-bottom: 1rem;
-      display: none;
+      flex: 1 1 30%;
+      margin: 5px 0;
+    }
+
+    .slider-container {
+      position: relative;
+      background-color: #7ec8e3;
+      border-radius: 10px;
+      height: 45px;
+      user-select: none;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+
+    .slider-text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      z-index: 1;
+      pointer-events: none;
+      font-size: 4vw;
+    }
+
+    .slider-button {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      color: #7ec8e3;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 40px;
+      cursor: grab;
+      transition: left 0.2s;
+      z-index: 2;
+    }
+
+    .menu-inferior {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      animation: flotar 4s ease-in-out infinite;
+      flex-wrap: wrap;
+    }
+
+    .menu-inferior a {
+      text-decoration: none;
+      color: black;
+      font-size: 4vw;
+      text-align: center;
+      flex: 1 1 20%;
+    }
+
+    .menu-inferior .enlace {
+      color: #7ec8e3;
+      font-weight: bold;
+    }
+
+    @media (min-width: 600px) {
+      .barra-superior { font-size: 24px; }
+      .menu-iconos a,
+      .menu-inferior a { font-size: 14px; }
+      .titulo-plan { font-size: 18px; }
+      .slider-text { font-size: 14px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="formRegistro">
-      <h2>Registro</h2>
-      <div class="error" id="errorRegistro">Las contraseñas no coinciden</div>
-      <div class="input-group phone-prefix">
-        <span>+57</span>
-        <input type="text" id="regTelefono" placeholder=" " required>
-        <label for="regTelefono">Número de teléfono</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="regPassword" placeholder=" " required>
-        <label for="regPassword">Contraseña</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="regConfirmar" placeholder=" " required>
-        <label for="regConfirmar">Confirmar contraseña</label>
-      </div>
-      <div class="input-group">
-        <input type="text" id="regCodigo" placeholder=" " required>
-        <label for="regCodigo">Código de invitación</label>
-      </div>
-      <button onclick="registrar()">Registrarse</button>
-      <div class="switch-link" onclick="mostrarLogin()">¿Ya tienes cuenta? Inicia sesión</div>
-    </div>
 
-    <div id="formLogin" style="display:none">
-      <h2>Iniciar Sesión</h2>
-      <div class="error" id="errorLogin">Credenciales incorrectas</div>
-      <div class="input-group phone-prefix">
-        <span>+57</span>
-        <input type="text" id="loginTelefono" placeholder=" " required>
-        <label for="loginTelefono">Número de teléfono</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="loginPassword" placeholder=" " required>
-        <label for="loginPassword">Contraseña</label>
-      </div>
-      <button onclick="iniciarSesion()">Entrar</button>
-      <div class="switch-link" onclick="mostrarRegistro()">¿No tienes cuenta? Regístrate</div>
-    </div>
+  <div class="barra-superior">NORDEX ENERGY</div>
+
+  <div class="menu-iconos">
+    <a href="#">Ingreso</a>
+    <a href="#">Retirar</a>
+    <a href="#">Acerca de</a>
+    <a href="#">CSD</a>
+  </div>
+
+  <div id="planes"></div>
+
+  <div class="menu-inferior">
+    <a href="#">Hogar</a>
+    <a href="#">Mi inversión</a>
+    <a href="#" class="enlace">Enlace</a>
+    <a href="#">Equipo</a>
+    <a href="perfil.html">Perfil</a> <!-- ✔️ Aquí se redirige correctamente -->
   </div>
 
   <script>
-    function mostrarLogin() {
-      document.getElementById('formRegistro').style.display = 'none';
-      document.getElementById('formLogin').style.display = 'block';
-    }
-    function mostrarRegistro() {
-      document.getElementById('formLogin').style.display = 'none';
-      document.getElementById('formRegistro').style.display = 'block';
-    }
+    const planes = [
+      { titulo: "ZERO-1", deposito: 25000, diario: "20%", dias: 50, hora: "22:45", fecha: "Jun 13th", retorno: 5000 },
+      { titulo: "ZERO-2", deposito: 50000, diario: "25%", dias: 40, hora: "10:00", fecha: "Jun 14th", retorno: 12500 },
+      { titulo: "ZERO-3", deposito: 100000, diario: "30%", dias: 30, hora: "12:00", fecha: "Jun 15th", retorno: 30000 },
+      { titulo: "ZERO-4", deposito: 200000, diario: "35%", dias: 25, hora: "16:00", fecha: "Jun 16th", retorno: 70000 }
+    ];
 
-    function registrar() {
-      const tel = document.getElementById('regTelefono').value;
-      const pass = document.getElementById('regPassword').value;
-      const conf = document.getElementById('regConfirmar').value;
+    const contenedor = document.getElementById("planes");
+    planes.forEach(p => {
+      contenedor.innerHTML += `
+        <div class="plan">
+          <div class="titulo-plan">${p.titulo}</div>
+          <div class="datos-plan">
+            <div><div style="font-size: 5vw; color: orange;">${p.deposito}</div><div>Depósito</div></div>
+            <div><div style="font-size: 5vw; color: red;">${p.diario}</div><div>A diario</div></div>
+            <div><div style="font-size: 4.5vw; font-weight: bold;">${p.dias} Días</div><div>Período</div></div>
+          </div>
+          <div style="font-size: 3.8vw; margin: 10px 0;">
+            <b>Comprar:</b> Empieza en ${p.hora} ${p.fecha}<br>
+            <b>Liquidación:</b> Diario ${p.hora} pm<br>
+            <b>Retorno diario:</b> ${p.retorno} ($)
+          </div>
+          <div class="slider-container" ontouchstart="startSlide(event, this)" onmousedown="startSlide(event, this)">
+            <div class="slider-text">Deslice para invertir</div>
+            <div class="slider-button">▶</div>
+          </div>
+        </div>
+      `;
+    });
 
-      if (pass !== conf) {
-        document.getElementById('errorRegistro').style.display = 'block';
-        return;
+    function startSlide(e, container) {
+      e.preventDefault();
+      const button = container.querySelector('.slider-button');
+      const max = container.offsetWidth - button.offsetWidth;
+      let startX = (e.touches ? e.touches[0].clientX : e.clientX) - button.offsetLeft;
+
+      function move(ev) {
+        let x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - startX;
+        x = Math.max(0, Math.min(x, max));
+        button.style.left = x + "px";
+        if (x >= max) {
+          cleanup();
+          setTimeout(() => {
+            alert("✅ ¡Inversión exitosa!");
+            button.style.left = "2px";
+          }, 150);
+        }
       }
 
-      document.getElementById('errorRegistro').style.display = 'none';
-
-      // Guardar en localStorage (simulación)
-      localStorage.setItem('user', tel);
-      localStorage.setItem('pass', pass);
-
-      alert("Registro exitoso");
-      window.location.href = "home.html";
-    }
-
-    function iniciarSesion() {
-      const tel = document.getElementById('loginTelefono').value;
-      const pass = document.getElementById('loginPassword').value;
-
-      const savedTel = localStorage.getItem('user');
-      const savedPass = localStorage.getItem('pass');
-
-      if (tel === savedTel && pass === savedPass) {
-        document.getElementById('errorLogin').style.display = 'none';
-        window.location.href = "home.html";
-      } else {
-        document.getElementById('errorLogin').style.display = 'block';
+      function end() {
+        if (parseInt(button.style.left) < max) {
+          button.style.left = "2px";
+        }
+        cleanup();
       }
+
+      function cleanup() {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', end);
+        document.removeEventListener('touchmove', move);
+        document.removeEventListener('touchend', end);
+      }
+
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', end);
+      document.addEventListener('touchmove', move);
+      document.addEventListener('touchend', end);
     }
   </script>
+
 </body>
 </html>
