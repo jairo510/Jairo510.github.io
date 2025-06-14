@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registro</title>
+  <title>Login y Registro</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -14,7 +14,7 @@
       height: 100vh;
       margin: 0;
     }
-    .form-container {
+    .container {
       background-color: #ffffff;
       padding: 2rem;
       border-radius: 16px;
@@ -25,12 +25,11 @@
     h2 {
       text-align: center;
       color: #00796b;
-      margin-bottom: 2rem;
-      font-size: 1.6rem;
+      margin-bottom: 1rem;
     }
     .input-group {
       position: relative;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
     }
     .input-group input {
       width: 100%;
@@ -88,6 +87,13 @@
     button:hover {
       background-color: #00695c;
     }
+    .switch-link {
+      text-align: center;
+      margin-top: 1rem;
+      color: #00796b;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
     .error {
       color: red;
       text-align: center;
@@ -97,48 +103,119 @@
   </style>
 </head>
 <body>
-  <form class="form-container" id="registroForm">
-    <h2>Registro</h2>
-    <div class="error" id="errorMensaje">Las contraseñas no coinciden</div>
-
-    <div class="input-group phone-prefix">
-      <span>+57</span>
-      <input type="text" name="telefono" id="telefono" placeholder=" " required>
-      <label for="telefono">Número de teléfono</label>
+  <div class="container">
+    <div id="formRegistro">
+      <h2>Registro</h2>
+      <div class="error" id="errorRegistro"></div>
+      <div class="input-group phone-prefix">
+        <span>+57</span>
+        <input type="text" id="regTelefono" placeholder=" " required>
+        <label for="regTelefono">Número de teléfono</label>
+      </div>
+      <div class="input-group">
+        <input type="password" id="regPassword" placeholder=" " required>
+        <label for="regPassword">Contraseña</label>
+      </div>
+      <div class="input-group">
+        <input type="password" id="regConfirmar" placeholder=" " required>
+        <label for="regConfirmar">Confirmar contraseña</label>
+      </div>
+      <div class="input-group">
+        <input type="text" id="regCodigo" placeholder=" " required>
+        <label for="regCodigo">Código de invitación</label>
+      </div>
+      <button onclick="registrar()">Registrarse</button>
+      <div class="switch-link" onclick="mostrarLogin()">¿Ya tienes cuenta? Inicia sesión</div>
     </div>
 
-    <div class="input-group">
-      <input type="password" name="password" id="password" placeholder=" " required>
-      <label for="password">Contraseña</label>
+    <div id="formLogin" style="display:none">
+      <h2>Iniciar Sesión</h2>
+      <div class="error" id="errorLogin"></div>
+      <div class="input-group phone-prefix">
+        <span>+57</span>
+        <input type="text" id="loginTelefono" placeholder=" " required>
+        <label for="loginTelefono">Número de teléfono</label>
+      </div>
+      <div class="input-group">
+        <input type="password" id="loginPassword" placeholder=" " required>
+        <label for="loginPassword">Contraseña</label>
+      </div>
+      <button onclick="iniciarSesion()">Entrar</button>
+      <div class="switch-link" onclick="mostrarRegistro()">¿No tienes cuenta? Regístrate</div>
     </div>
-
-    <div class="input-group">
-      <input type="password" name="confirmar_password" id="confirmar_password" placeholder=" " required>
-      <label for="confirmar_password">Confirmar contraseña</label>
-    </div>
-
-    <div class="input-group">
-      <input type="text" name="codigo_invitacion" id="codigo_invitacion" placeholder=" " required>
-      <label for="codigo_invitacion">Código de Invitación</label>
-    </div>
-
-    <button type="submit">Registrarse</button>
-  </form>
+  </div>
 
   <script>
-    document.getElementById('registroForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const pass = document.getElementById('password').value;
-      const confirm = document.getElementById('confirmar_password').value;
-      const error = document.getElementById('errorMensaje');
+    function mostrarLogin() {
+      document.getElementById('formRegistro').style.display = 'none';
+      document.getElementById('formLogin').style.display = 'block';
+    }
 
-      if (pass !== confirm) {
-        error.style.display = 'block';
-      } else {
-        error.style.display = 'none';
-        window.location.href = 'home.html'; // Redirige a home.html
+    function mostrarRegistro() {
+      document.getElementById('formLogin').style.display = 'none';
+      document.getElementById('formRegistro').style.display = 'block';
+    }
+
+    function getUsuarios() {
+      const data = localStorage.getItem('usuarios');
+      return data ? JSON.parse(data) : [];
+    }
+
+    function setUsuarios(usuarios) {
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    }
+
+    function registrar() {
+      const tel = document.getElementById('regTelefono').value.trim();
+      const pass = document.getElementById('regPassword').value;
+      const conf = document.getElementById('regConfirmar').value;
+      const codigo = document.getElementById('regCodigo').value.trim();
+
+      if (pass !== conf) {
+        mostrarError('errorRegistro', "Las contraseñas no coinciden");
+        return;
       }
-    });
+
+      const usuarios = getUsuarios();
+
+      const existe = usuarios.find(u => u.telefono === tel);
+      if (existe) {
+        mostrarError('errorRegistro', "Este número ya está registrado");
+        return;
+      }
+
+      usuarios.push({ telefono: tel, password: pass, codigo });
+      setUsuarios(usuarios);
+
+      alert("Registro exitoso");
+      window.location.href = "home.html";
+    }
+
+    function iniciarSesion() {
+      const tel = document.getElementById('loginTelefono').value.trim();
+      const pass = document.getElementById('loginPassword').value;
+
+      const usuarios = getUsuarios();
+      const user = usuarios.find(u => u.telefono === tel && u.password === pass);
+
+      if (user) {
+        ocultarError('errorLogin');
+        window.location.href = "home.html";
+      } else {
+        mostrarError('errorLogin', "Credenciales incorrectas");
+      }
+    }
+
+    function mostrarError(id, mensaje) {
+      const el = document.getElementById(id);
+      el.textContent = mensaje;
+      el.style.display = 'block';
+    }
+
+    function ocultarError(id) {
+      const el = document.getElementById(id);
+      el.style.display = 'none';
+    }
   </script>
 </body>
 </html>
