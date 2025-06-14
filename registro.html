@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nordex - Acceso</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro - NORDEX</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -28,26 +28,9 @@
       font-size: 1.8rem;
       font-weight: bold;
     }
-    .tabs {
-      display: flex;
-      margin-bottom: 1.5rem;
+    .form-group {
+      margin-bottom: 1rem;
     }
-    .tab {
-      flex: 1;
-      padding: 0.5rem;
-      text-align: center;
-      cursor: pointer;
-      border-bottom: 2px solid #e0e0e0;
-      transition: all 0.3s;
-    }
-    .tab.active {
-      border-bottom-color: #0066cc;
-      color: #0066cc;
-      font-weight: bold;
-    }
-    .form { display: none; }
-    .form.active { display: block; }
-    .form-group { margin-bottom: 1rem; }
     input {
       width: 100%;
       padding: 0.8rem;
@@ -72,101 +55,73 @@
       transition: background 0.3s;
     }
     .btn:hover { background: #004080; }
-    .optional {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 0.3rem;
+    .link {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    .link a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <div class="logo">NORDEX</div>
+    <div class="logo">Registro - NORDEX</div>
 
-    <div class="tabs">
-      <div class="tab active" onclick="showForm('login')">Iniciar Sesión</div>
-      <div class="tab" onclick="showForm('register')">Registro</div>
-    </div>
-
-    <form class="form active" id="login" onsubmit="return loginUser(event)">
+    <form onsubmit="return registerUser(event)">
       <div class="form-group">
-        <input type="tel" id="loginPhone" placeholder="Número de teléfono" required>
-      </div>
-      <div class="form-group">
-        <input type="password" id="loginPass" placeholder="Contraseña" required>
-      </div>
-      <button type="submit" class="btn">Ingresar</button>
-    </form>
-
-    <form class="form" id="register" onsubmit="return registerUser(event)">
-      <div class="form-group">
-        <input type="text" id="fullName" placeholder="Nombre completo" required>
+        <input type="text" id="username" placeholder="Nombre de usuario" required>
       </div>
       <div class="form-group">
         <input type="tel" id="phone" placeholder="Número de teléfono" required>
       </div>
       <div class="form-group">
-        <input type="email" id="email" placeholder="Correo electrónico" required>
-      </div>
-      <div class="form-group">
-        <input type="password" id="regPassword" placeholder="Contraseña" required>
-      </div>
-      <div class="form-group">
-        <div class="optional">Código de referido (opcional)</div>
-        <input type="text" id="refCode" placeholder="Código de referido">
+        <input type="text" id="refCode" placeholder="Código de referido" required>
       </div>
       <button type="submit" class="btn">Registrarse</button>
     </form>
+
+    <div class="link">
+      ¿Ya tienes cuenta? <a href="inicio.html">Iniciar</a>
+    </div>
   </div>
 
   <script>
-    function showForm(type) {
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.form').forEach(form => form.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById(type).classList.add('active');
-    }
-
     function registerUser(event) {
       event.preventDefault();
-      const name = document.getElementById('fullName').value;
-      const phone = document.getElementById('phone').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('regPassword').value;
+
+      const username = document.getElementById('username').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const refCode = document.getElementById('refCode').value.trim();
+
+      // Validar que el nombre de usuario no contenga números
+      const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/;
+      if (!nameRegex.test(username)) {
+        alert("El nombre de usuario debe contener solo letras (sin números).");
+        return false;
+      }
+
+      if (!refCode) {
+        alert("El código de referido es obligatorio.");
+        return false;
+      }
 
       if (localStorage.getItem(phone)) {
-        alert('Este número ya está registrado');
+        alert("Este número ya está registrado.");
         return false;
       }
 
-      const user = { name, phone, email, password };
+      const user = { username, phone, refCode };
       localStorage.setItem(phone, JSON.stringify(user));
-      alert('Registro exitoso');
-      window.location.href = "index.html"; // Redirección después de registro
-      return false;
-    }
-
-    function loginUser(event) {
-      event.preventDefault();
-      const phone = document.getElementById('loginPhone').value;
-      const password = document.getElementById('loginPass').value;
-
-      const userData = localStorage.getItem(phone);
-      if (!userData) {
-        alert('Número no registrado');
-        return false;
-      }
-
-      const user = JSON.parse(userData);
-      if (user.password !== password) {
-        alert('Contraseña incorrecta');
-        return false;
-      }
-
-      alert('Bienvenido ' + user.name);
-      window.location.href = "index.html"; // Redirección después de login
+      alert("✅ Registro exitoso");
+      window.location.href = "index.html"; // Redirige al login
       return false;
     }
   </script>
+
 </body>
 </html>
