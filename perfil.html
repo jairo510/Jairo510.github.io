@@ -2,10 +2,175 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Perfil</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f0f2f5;
+    }
+
+    .top-bar {
+      background: #0073e6;
+      color: white;
+      padding: 15px;
+      font-size: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .saldo-box {
+      background: linear-gradient(135deg, #0a84ff, #0051c7);
+      margin: 20px;
+      border-radius: 16px;
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .saldo-box div {
+      text-align: center;
+    }
+
+    .saldo-box p {
+      margin: 5px 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .saldo-box h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .titulo {
+      margin-left: 20px;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .grid-funciones {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .funcion {
+      background: white;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .funcion img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .funcion p {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .nav a {
+      text-align: center;
+      font-size: 12px;
+      text-decoration: none;
+      color: #666;
+    }
+
+    .nav a.active {
+      color: #0073e6;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenido a tu Perfil</h1>
-  <a href="home.html">← Volver al inicio</a>
+
+  <div class="top-bar">
+    <div>Perfil</div>
+    <div>🛎️ Soporte</div>
+  </div>
+
+  <div class="saldo-box">
+    <div>
+      <p>Mi saldo</p>
+      <h2>$250.00</h2>
+    </div>
+    <div>
+      <p>Hoy beneficio</p>
+      <h2>$250</h2>
+    </div>
+  </div>
+
+  <div class="titulo">Más funciones</div>
+
+  <div class="grid-funciones">
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/bank-cards.png" alt="Banco Bind"/>
+      <p>Banco Bind Tarjeta</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/download.png" alt="Descargar"/>
+      <p>Descargar App</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/money-transfer.png" alt="Retirar"/>
+      <p>Retirar</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/technical-support.png" alt="Soporte"/>
+      <p>Cliente Apoyo</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/search.png" alt="Cantidad"/>
+      <p>Cantidad Registro</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/approve.png" alt="Recargar"/>
+      <p>Recargar Registro</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/info.png" alt="Sobre"/>
+      <p>Sobre nosotros</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/share.png" alt="Recomendación"/>
+      <p>Mi recomendación</p>
+    </div>
+    <div class="funcion">
+      <img src="https://img.icons8.com/fluency/48/logout-rounded-up.png" alt="Salir"/>
+      <p>Finalizar la sesión</p>
+    </div>
+  </div>
+
+  <div class="nav">
+    <a href="home.html">🏠<br>Hogar</a>
+    <a href="#">🌱<br>Mi inversión</a>
+    <a href="#" class="active">🏆<br>Enlace</a>
+    <a href="#">🤝<br>Equipo</a>
+    <a href="perfil.html">👤<br>Perfil</a>
+  </div>
+
 </body>
 </html>
