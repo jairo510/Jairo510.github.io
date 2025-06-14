@@ -1,41 +1,3 @@
-<?php
-// Conexión a la base de datos
-$host = "localhost";
-$user = "root";
-$pass = ""; // Cambia por tu contraseña si la tienes
-$db = "miapp";
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-$error = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $telefono = $_POST["telefono"];
-    $password = $_POST["password"];
-    $confirmar = $_POST["confirmar_password"];
-    $codigo_invitacion = $_POST["codigo_invitacion"];
-
-    if ($password !== $confirmar) {
-        $error = "Las contraseñas no coinciden.";
-    } else {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        $stmt = $conn->prepare("INSERT INTO usuarios (telefono, password, codigo_invitacion) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $telefono, $hashed_password, $codigo_invitacion);
-
-        if ($stmt->execute()) {
-            header("Location: home.html");
-            exit();
-        } else {
-            $error = "Error al registrar: " . $conn->error;
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -130,14 +92,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       color: red;
       text-align: center;
       margin-bottom: 1rem;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <form class="form-container" method="POST">
+  <form class="form-container" id="registroForm">
     <h2>Registro</h2>
-
-    <?php if (!empty($error)) echo "<div class='error'>$error</div>"; ?>
+    <div class="error" id="errorMensaje">Las contraseñas no coinciden</div>
 
     <div class="input-group phone-prefix">
       <span>+57</span>
@@ -162,5 +124,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <button type="submit">Registrarse</button>
   </form>
+
+  <script>
+    document.getElementById('registroForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmar_password').value;
+      const error = document.getElementById('errorMensaje');
+
+      if (pass !== confirm) {
+        error.style.display = 'block';
+      } else {
+        error.style.display = 'none';
+        window.location.href = 'home.html'; // Redirige a home.html
+      }
+    });
+  </script>
 </body>
 </html>
