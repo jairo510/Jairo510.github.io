@@ -8,127 +8,146 @@
     @keyframes flotar {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
-    }body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f7f7f7;
-}
+    }
 
-.barra-superior {
-  background: #1F51FF;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  font-size: 24px;
-  text-shadow: 0 0 8px #ffffff, 0 0 15px #1F51FF;
-  box-shadow: 0 0 12px #1F51FF;
-  font-weight: bold;
-  animation: flotar 3s ease-in-out infinite;
-}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+    }
 
-.menu-iconos {
-  display: flex;
-  justify-content: space-around;
-  background: white;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-}
+    .barra-superior {
+      background: #1F51FF;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 6vw;
+      text-shadow: 0 0 8px #ffffff, 0 0 15px #1F51FF;
+      box-shadow: 0 0 12px #1F51FF;
+      font-weight: bold;
+      animation: flotar 3s ease-in-out infinite;
+    }
 
-.menu-iconos a {
-  text-decoration: none;
-  color: black;
-  font-size: 14px;
-  text-align: center;
-}
+    .menu-iconos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background: white;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
 
-.plan {
-  background: white;
-  margin: 15px;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 0 10px #ccc;
-}
+    .menu-iconos a {
+      text-decoration: none;
+      color: black;
+      font-size: 4vw;
+      text-align: center;
+      flex: 1 1 25%;
+      padding: 5px 0;
+    }
 
-.titulo-plan {
-  font-weight: bold;
-  font-size: 18px;
-  color: #1f77c7;
-  margin-bottom: 10px;
-}
+    .plan {
+      background: white;
+      margin: 4vw;
+      border-radius: 10px;
+      padding: 4vw;
+      box-shadow: 0 0 10px #ccc;
+    }
 
-.datos-plan {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-}
+    .titulo-plan {
+      font-weight: bold;
+      font-size: 5vw;
+      color: #1f77c7;
+      margin-bottom: 10px;
+      text-align: center;
+    }
 
-.datos-plan div {
-  text-align: center;
-}
+    .datos-plan {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 10px 0;
+    }
 
-.slider-container {
-  position: relative;
-  background-color: #7ec8e3;
-  border-radius: 10px;
-  height: 45px;
-  user-select: none;
-  overflow: hidden;
-  margin-top: 10px;
-}
+    .datos-plan div {
+      text-align: center;
+      flex: 1 1 30%;
+      margin: 5px 0;
+    }
 
-.slider-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-weight: bold;
-  z-index: 1;
-  pointer-events: none;
-}
+    .slider-container {
+      position: relative;
+      background-color: #7ec8e3;
+      border-radius: 10px;
+      height: 45px;
+      user-select: none;
+      overflow: hidden;
+      margin-top: 15px;
+    }
 
-.slider-button {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  color: #7ec8e3;
-  border-radius: 8px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 40px;
-  cursor: grab;
-  transition: left 0.2s;
-  z-index: 2;
-}
+    .slider-text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      z-index: 1;
+      pointer-events: none;
+      font-size: 4vw;
+    }
 
-.menu-inferior {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  border-top: 1px solid #ccc;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  animation: flotar 4s ease-in-out infinite;
-}
+    .slider-button {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      color: #7ec8e3;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 40px;
+      cursor: grab;
+      transition: left 0.2s;
+      z-index: 2;
+    }
 
-.menu-inferior a {
-  text-decoration: none;
-  color: black;
-  font-size: 14px;
-  text-align: center;
-}
+    .menu-inferior {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      animation: flotar 4s ease-in-out infinite;
+      flex-wrap: wrap;
+    }
 
-.menu-inferior .enlace {
-  color: #7ec8e3;
-  font-weight: bold;
-}
+    .menu-inferior a {
+      text-decoration: none;
+      color: black;
+      font-size: 4vw;
+      text-align: center;
+      flex: 1 1 20%;
+    }
 
+    .menu-inferior .enlace {
+      color: #7ec8e3;
+      font-weight: bold;
+    }
+
+    @media (min-width: 600px) {
+      .barra-superior { font-size: 24px; }
+      .menu-iconos a,
+      .menu-inferior a { font-size: 14px; }
+      .titulo-plan { font-size: 18px; }
+      .slider-text { font-size: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -138,33 +157,39 @@
     <a href="#">Retirar</a>
     <a href="#">Acerca de</a>
     <a href="#">CSD</a>
-  </div>  <!-- Planes -->  <script>
+  </div>
+
+  <div id="planes"></div>
+
+  <div class="menu-inferior">
+    <a href="#">Hogar</a>
+    <a href="#">Mi inversión</a>
+    <a href="#" class="enlace">Enlace</a>
+    <a href="#">Equipo</a>
+    <a href="#">Perfil</a>
+  </div>
+
+  <script>
     const planes = [
       { titulo: "ZERO-1", deposito: 25000, diario: "20%", dias: 50, hora: "22:45", fecha: "Jun 13th", retorno: 5000 },
       { titulo: "ZERO-2", deposito: 50000, diario: "25%", dias: 40, hora: "10:00", fecha: "Jun 14th", retorno: 12500 },
       { titulo: "ZERO-3", deposito: 100000, diario: "30%", dias: 30, hora: "12:00", fecha: "Jun 15th", retorno: 30000 },
       { titulo: "ZERO-4", deposito: 200000, diario: "35%", dias: 25, hora: "16:00", fecha: "Jun 16th", retorno: 70000 }
     ];
-  </script>  <div id="planes"></div>  <div class="menu-inferior">
-    <a href="#">Hogar</a>
-    <a href="#">Mi inversión</a>
-    <a href="#" class="enlace">Enlace</a>
-    <a href="#">Equipo</a>
-    <a href="#">Perfil</a>
-  </div>  <script>
+
     const contenedor = document.getElementById("planes");
     planes.forEach(p => {
       contenedor.innerHTML += `
         <div class="plan">
           <div class="titulo-plan">${p.titulo}</div>
           <div class="datos-plan">
-            <div><div style="font-size: 20px; color: orange;">${p.deposito}</div><div>Depósito</div></div>
-            <div><div style="font-size: 20px; color: red;">${p.diario}</div><div>A diario</div></div>
-            <div><div style="font-size: 18px; font-weight: bold;">${p.dias} Días</div><div>Período</div></div>
+            <div><div style="font-size: 5vw; color: orange;">${p.deposito}</div><div>Depósito</div></div>
+            <div><div style="font-size: 5vw; color: red;">${p.diario}</div><div>A diario</div></div>
+            <div><div style="font-size: 4.5vw; font-weight: bold;">${p.dias} Días</div><div>Período</div></div>
           </div>
-          <div style="font-size: 14px; margin: 10px 0;">
+          <div style="font-size: 3.8vw; margin: 10px 0;">
             <b>Comprar:</b> Empieza en ${p.hora} ${p.fecha}<br>
-            <b>Tiempo de liquidación:</b> A diario ${p.hora} pm<br>
+            <b>Liquidación:</b> Diario ${p.hora} pm<br>
             <b>Retorno diario:</b> ${p.retorno} ($)
           </div>
           <div class="slider-container" ontouchstart="startSlide(event, this)" onmousedown="startSlide(event, this)">
@@ -188,7 +213,7 @@
         if (x >= max) {
           cleanup();
           setTimeout(() => {
-            alert("✅ ¡Inversion exitosa!");
+            alert("✅ ¡Inversión exitosa!");
             button.style.left = "2px";
           }, 150);
         }
