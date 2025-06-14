@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nordex - Iniciar Sesión</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0066cc, #004080);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #0066cc;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #0066cc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover { background: #004080; }
+
+    .link {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .link a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">NORDEX</div>
+
+    <form onsubmit="return loginUser(event)">
+      <div class="form-group">
+        <input type="tel" id="loginPhone" placeholder="Número de teléfono" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="loginPass" placeholder="Contraseña" required>
+      </div>
+      <button type="submit" class="btn">Ingresar</button>
+    </form>
+
+    <div class="link">
+      ¿No tienes cuenta? <a href="registro.html">Registrarse</a>
+    </div>
+  </div>
+
+  <script>
+    function loginUser(event) {
+      event.preventDefault();
+      const phone = document.getElementById('loginPhone').value;
+      const password = document.getElementById('loginPass').value;
+
+      const userData = localStorage.getItem(phone);
+      if (!userData) {
+        alert('Número no registrado');
+        return false;
+      }
+
+      const user = JSON.parse(userData);
+      if (user.password !== password) {
+        alert('Contraseña incorrecta');
+        return false;
+      }
+
+      alert('Bienvenido ' + user.name);
+      // Aquí puedes redirigir o cargar otro contenido
+      return false;
+    }
+  </script>
+</body>
+</html>
