@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nordex - Portal de Empleados</title>
+    <title>Nordex Colombia - Portal de Clientes</title>
     <style>
         * {
             margin: 0;
@@ -42,12 +42,13 @@
         height: 120px;
         background: white;
         border-radius: 50px;
-        animation: rotate 6s linear infinite;
+        animation: rotate 8s linear infinite;
     }
 
-    .turbine:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-    .turbine:nth-child(2) { top: 40%; right: 15%; animation-delay: 2s; }
-    .turbine:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+    .turbine:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+    .turbine:nth-child(2) { top: 35%; right: 15%; animation-delay: 2s; }
+    .turbine:nth-child(3) { bottom: 25%; left: 20%; animation-delay: 4s; }
+    .turbine:nth-child(4) { top: 60%; right: 30%; animation-delay: 6s; }
 
     @keyframes rotate {
         from { transform: rotate(0deg); }
@@ -60,19 +61,33 @@
         border-radius: 20px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         width: 100%;
-        max-width: 450px;
+        max-width: 480px;
         backdrop-filter: blur(15px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         z-index: 10;
         position: relative;
     }
 
-    .nordex-logo {
+    .nordex-header {
         text-align: center;
         margin-bottom: 2rem;
+        position: relative;
     }
 
-    .nordex-logo h1 {
+    .nordex-header::before {
+        content: "🌪️";
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 0.5rem;
+        animation: spin 10s linear infinite;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .nordex-header h1 {
         color: #1e3c72;
         font-size: 2.5rem;
         font-weight: 700;
@@ -80,12 +95,18 @@
         text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
 
-    .nordex-logo p {
+    .nordex-header p {
         color: #4CAF50;
         font-size: 1rem;
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 2px;
+    }
+
+    .colombia-flag {
+        display: inline-block;
+        margin-left: 0.5rem;
+        font-size: 1.2rem;
     }
 
     .form-container {
@@ -123,10 +144,26 @@
         font-size: 0.9rem;
     }
 
+    .phone-input {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .country-code {
+        background: #f8f9fa;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 1rem;
+        font-weight: 600;
+        color: #1e3c72;
+        font-size: 1rem;
+        min-width: 80px;
+        text-align: center;
+    }
+
     input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    select {
+    input[type="tel"],
+    input[type="password"] {
         width: 100%;
         padding: 1rem;
         border: 2px solid #e0e0e0;
@@ -138,13 +175,48 @@
     }
 
     input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="password"]:focus,
-    select:focus {
+    input[type="tel"]:focus,
+    input[type="password"]:focus {
         outline: none;
         border-color: #4CAF50;
         box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
         transform: translateY(-2px);
+    }
+
+    .captcha-container {
+        background: #f8f9fa;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .captcha-code {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e3c72;
+        background: linear-gradient(45deg, #1e3c72, #4CAF50);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: line-through;
+        text-decoration-color: rgba(0,0,0,0.3);
+        letter-spacing: 3px;
+        margin-bottom: 0.5rem;
+    }
+
+    .refresh-captcha {
+        background: none;
+        border: none;
+        color: #4CAF50;
+        cursor: pointer;
+        font-size: 0.9rem;
+        text-decoration: underline;
+    }
+
+    .refresh-captcha:hover {
+        color: #1e3c72;
     }
 
     .btn {
@@ -171,6 +243,12 @@
 
     .btn:active {
         transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
     }
 
     .switch-form {
@@ -213,6 +291,16 @@
         border-left: 4px solid #27ae60;
     }
 
+    .referral-info {
+        background: rgba(76, 175, 80, 0.1);
+        padding: 0.8rem;
+        border-radius: 8px;
+        border-left: 4px solid #4CAF50;
+        font-size: 0.9rem;
+        color: #1e3c72;
+        margin-bottom: 1rem;
+    }
+
     /* Home Page Styles */
     .home-container {
         display: none;
@@ -223,7 +311,7 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         backdrop-filter: blur(15px);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        max-width: 600px;
+        max-width: 700px;
         width: 100%;
         z-index: 10;
         position: relative;
@@ -234,11 +322,28 @@
         animation: fadeIn 0.6s ease;
     }
 
+    .welcome-header {
+        margin-bottom: 2rem;
+    }
+
+    .welcome-header::before {
+        content: "🇨🇴";
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
     .welcome-message {
         font-size: 2.5rem;
         color: #1e3c72;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         font-weight: 700;
+    }
+
+    .welcome-subtitle {
+        color: #4CAF50;
+        font-size: 1.2rem;
+        font-weight: 500;
     }
 
     .user-info {
@@ -263,7 +368,7 @@
 
     .dashboard-stats {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 1rem;
         margin: 2rem 0;
     }
@@ -305,18 +410,6 @@
         box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
     }
 
-    .wind-icon {
-        font-size: 3rem;
-        color: #4CAF50;
-        margin-bottom: 1rem;
-        animation: spin 10s linear infinite;
-    }
-
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-
     @media (max-width: 768px) {
         .container, .home-container {
             margin: 1rem;
@@ -325,6 +418,14 @@
         
         .dashboard-stats {
             grid-template-columns: 1fr;
+        }
+
+        .phone-input {
+            flex-direction: column;
+        }
+
+        .country-code {
+            min-width: auto;
         }
     }
 </style>
@@ -337,23 +438,27 @@
         <div class="turbine"></div>
         <div class="turbine"></div>
         <div class="turbine"></div>
+        <div class="turbine"></div>
     </div>
 
 ```
 <div class="container">
-    <!-- Logo de Nordex -->
-    <div class="nordex-logo">
+    <!-- Header de Nordex -->
+    <div class="nordex-header">
         <h1>NORDEX</h1>
-        <p>Energía Eólica Sostenible</p>
+        <p>Energía Eólica Colombia <span class="colombia-flag">🇨🇴</span></p>
     </div>
 
     <!-- Formulario de Inicio de Sesión -->
     <div id="loginForm" class="form-container active">
-        <h2>Acceso de Empleados</h2>
+        <h2>Iniciar Sesión</h2>
         <form id="loginFormElement">
             <div class="form-group">
-                <label for="loginEmail">📧 Email Corporativo:</label>
-                <input type="email" id="loginEmail" name="email" placeholder="nombre@nordex.com" required>
+                <label for="loginPhone">📱 Número de Teléfono:</label>
+                <div class="phone-input">
+                    <div class="country-code">+57</div>
+                    <input type="tel" id="loginPhone" name="phone" placeholder="3001234567" required>
+                </div>
             </div>
             <div class="form-group">
                 <label for="loginPassword">🔒 Contraseña:</label>
@@ -364,38 +469,31 @@
             <div id="loginSuccess" class="success"></div>
         </form>
         <div class="switch-form">
-            <p>¿Nuevo empleado? <a href="#" onclick="showRegister()">Registra tu cuenta aquí</a></p>
+            <p>¿Nuevo cliente? <a href="#" onclick="showRegister()">Regístrate aquí</a></p>
         </div>
     </div>
 
     <!-- Formulario de Registro -->
     <div id="registerForm" class="form-container">
-        <h2>Registro de Empleado</h2>
+        <h2>Registro de Cliente</h2>
         <form id="registerFormElement">
             <div class="form-group">
-                <label for="registerName">👤 Nombre Completo:</label>
-                <input type="text" id="registerName" name="name" placeholder="Tu nombre completo" required>
+                <label for="registerPhone">📱 Número de Teléfono:</label>
+                <div class="phone-input">
+                    <div class="country-code">+57</div>
+                    <input type="tel" id="registerPhone" name="phone" placeholder="3001234567" required>
+                </div>
             </div>
             <div class="form-group">
-                <label for="registerEmail">📧 Email Corporativo:</label>
-                <input type="email" id="registerEmail" name="email" placeholder="nombre@nordex.com" required>
+                <label for="registerUsername">👤 Nombre de Usuario:</label>
+                <input type="text" id="registerUsername" name="username" placeholder="Tu nombre de usuario único" required>
             </div>
             <div class="form-group">
-                <label for="employeeId">🆔 ID de Empleado:</label>
-                <input type="text" id="employeeId" name="employeeId" placeholder="NX-2024-001" required>
-            </div>
-            <div class="form-group">
-                <label for="department">🏢 Departamento:</label>
-                <select id="department" name="department" required>
-                    <option value="">Selecciona tu departamento</option>
-                    <option value="engineering">Ingeniería</option>
-                    <option value="maintenance">Mantenimiento</option>
-                    <option value="operations">Operaciones</option>
-                    <option value="sales">Ventas</option>
-                    <option value="administration">Administración</option>
-                    <option value="rnd">I+D</option>
-                    <option value="quality">Control de Calidad</option>
-                </select>
+                <label for="referralCode">🎯 Código de Referido:</label>
+                <input type="text" id="referralCode" name="referralCode" placeholder="Código de referido (opcional)">
+                <div class="referral-info">
+                    💡 Si tienes un código de referido, ¡obtén descuentos especiales en tu primera instalación!
+                </div>
             </div>
             <div class="form-group">
                 <label for="registerPassword">🔒 Contraseña:</label>
@@ -405,7 +503,15 @@
                 <label for="confirmPassword">🔒 Confirmar Contraseña:</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repite tu contraseña" required>
             </div>
-            <button type="submit" class="btn">🌱 Registrar Cuenta</button>
+            <div class="form-group">
+                <label for="captchaInput">🔐 Código de Verificación:</label>
+                <div class="captcha-container">
+                    <div class="captcha-code" id="captchaCode">ABCD5</div>
+                    <button type="button" class="refresh-captcha" onclick="refreshCaptcha()">🔄 Generar nuevo código</button>
+                </div>
+                <input type="text" id="captchaInput" name="captcha" placeholder="Ingresa el código mostrado arriba" required>
+            </div>
+            <button type="submit" class="btn">🌱 Crear Cuenta</button>
             <div id="registerError" class="error"></div>
             <div id="registerSuccess" class="success"></div>
         </form>
@@ -417,22 +523,29 @@
 
 <!-- Página Home -->
 <div id="homePage" class="home-container">
-    <div class="wind-icon">🌪️</div>
-    <h1 class="welcome-message">¡Bienvenido a Nordex!</h1>
+    <div class="welcome-header">
+        <h1 class="welcome-message">¡Bienvenido a Nordex Colombia!</h1>
+        <p class="welcome-subtitle">Tu portal de energía eólica sostenible</p>
+    </div>
+    
     <div id="userInfo" class="user-info"></div>
     
     <div class="dashboard-stats">
         <div class="stat-card">
-            <h4>1,247</h4>
-            <p>Turbinas Activas</p>
+            <h4>45</h4>
+            <p>Turbinas en Colombia</p>
         </div>
         <div class="stat-card">
-            <h4>3.2 GW</h4>
-            <p>Energía Generada</p>
+            <h4>156 MW</h4>
+            <p>Capacidad Instalada</p>
         </div>
         <div class="stat-card">
-            <h4>98.5%</h4>
+            <h4>97.8%</h4>
             <p>Disponibilidad</p>
+        </div>
+        <div class="stat-card">
+            <h4>2,847</h4>
+            <p>Clientes Activos</p>
         </div>
     </div>
     
@@ -443,17 +556,37 @@
     // Datos de usuarios almacenados en memoria
     let users = [];
     let currentUser = null;
+    let currentCaptcha = '';
 
-    // Departamentos con sus nombres completos
-    const departments = {
-        'engineering': 'Ingeniería',
-        'maintenance': 'Mantenimiento',
-        'operations': 'Operaciones',
-        'sales': 'Ventas',
-        'administration': 'Administración',
-        'rnd': 'Investigación y Desarrollo',
-        'quality': 'Control de Calidad'
-    };
+    // Códigos de referido válidos
+    const validReferralCodes = [
+        'NORDEX2024',
+        'WIND2024',
+        'COLOMBIA2024',
+        'EOLICA2024',
+        'GREEN2024',
+        'REFERIDO123',
+        'ENERGIA2024'
+    ];
+
+    // Generar captcha aleatorio
+    function generateCaptcha() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let result = '';
+        for (let i = 0; i < 5; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    // Refrescar captcha
+    function refreshCaptcha() {
+        currentCaptcha = generateCaptcha();
+        document.getElementById('captchaCode').textContent = currentCaptcha;
+    }
+
+    // Inicializar captcha
+    refreshCaptcha();
 
     // Funciones para cambiar entre formularios
     function showLogin() {
@@ -466,18 +599,24 @@
         document.getElementById('registerForm').classList.add('active');
         document.getElementById('loginForm').classList.remove('active');
         clearMessages();
+        refreshCaptcha();
     }
 
     function showHome() {
         document.querySelector('.container').style.display = 'none';
         document.getElementById('homePage').classList.add('active');
+        
+        const referralStatus = currentUser.referralCode ? 
+            `<p><strong>Código de Referido:</strong> ${currentUser.referralCode} ✅</p>` : 
+            '<p><strong>Código de Referido:</strong> No utilizado</p>';
+        
         document.getElementById('userInfo').innerHTML = `
-            <h3>Información del Empleado</h3>
-            <p><strong>Nombre:</strong> ${currentUser.name}</p>
-            <p><strong>Email:</strong> ${currentUser.email}</p>
-            <p><strong>ID Empleado:</strong> ${currentUser.employeeId}</p>
-            <p><strong>Departamento:</strong> ${departments[currentUser.department]}</p>
+            <h3>Información del Cliente</h3>
+            <p><strong>Nombre de Usuario:</strong> ${currentUser.username}</p>
+            <p><strong>Teléfono:</strong> +57 ${currentUser.phone}</p>
+            ${referralStatus}
             <p><strong>Fecha de Registro:</strong> ${currentUser.registrationDate}</p>
+            <p><strong>Estado:</strong> Cliente Activo 🟢</p>
         `;
     }
 
@@ -500,16 +639,16 @@
         successElement.style.display = 'block';
     }
 
-    // Validación de email corporativo
-    function isValidNordexEmail(email) {
-        const emailRegex = /^[^\s@]+@nordex\.com$/i;
-        return emailRegex.test(email);
+    // Validación de número de teléfono colombiano
+    function isValidColombianPhone(phone) {
+        const phoneRegex = /^[3][0-9]{9}$/;
+        return phoneRegex.test(phone);
     }
 
-    // Validación de ID de empleado
-    function isValidEmployeeId(id) {
-        const idRegex = /^NX-\d{4}-\d{3,4}$/;
-        return idRegex.test(id);
+    // Validación de nombre de usuario
+    function isValidUsername(username) {
+        const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+        return usernameRegex.test(username);
     }
 
     // Manejo del formulario de registro
@@ -517,31 +656,26 @@
         e.preventDefault();
         clearMessages();
 
-        const name = document.getElementById('registerName').value.trim();
-        const email = document.getElementById('registerEmail').value.trim();
-        const employeeId = document.getElementById('employeeId').value.trim();
-        const department = document.getElementById('department').value;
+        const phone = document.getElementById('registerPhone').value.trim();
+        const username = document.getElementById('registerUsername').value.trim();
+        const referralCode = document.getElementById('referralCode').value.trim();
         const password = document.getElementById('registerPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
+        const captchaInput = document.getElementById('captchaInput').value.trim();
 
         // Validaciones
-        if (!name) {
-            showError('registerError', 'Por favor ingresa tu nombre completo');
+        if (!isValidColombianPhone(phone)) {
+            showError('registerError', 'El número debe ser un celular colombiano válido (ej: 3001234567)');
             return;
         }
 
-        if (!isValidNordexEmail(email)) {
-            showError('registerError', 'Debes usar tu email corporativo de Nordex (@nordex.com)');
+        if (!isValidUsername(username)) {
+            showError('registerError', 'El nombre de usuario debe tener 3-20 caracteres (letras, números, _)');
             return;
         }
 
-        if (!isValidEmployeeId(employeeId)) {
-            showError('registerError', 'El ID de empleado debe tener el formato: NX-YYYY-###');
-            return;
-        }
-
-        if (!department) {
-            showError('registerError', 'Por favor selecciona tu departamento');
+        if (referralCode && !validReferralCodes.includes(referralCode.toUpperCase())) {
+            showError('registerError', 'El código de referido no es válido');
             return;
         }
 
@@ -555,23 +689,28 @@
             return;
         }
 
-        // Verificar si el usuario ya existe
-        if (users.find(user => user.email === email)) {
-            showError('registerError', 'Este email ya está registrado');
+        if (captchaInput.toUpperCase() !== currentCaptcha) {
+            showError('registerError', 'El código de verificación es incorrecto');
+            refreshCaptcha();
             return;
         }
 
-        if (users.find(user => user.employeeId === employeeId)) {
-            showError('registerError', 'Este ID de empleado ya está registrado');
+        // Verificar si el usuario ya existe
+        if (users.find(user => user.phone === phone)) {
+            showError('registerError', 'Este número de teléfono ya está registrado');
+            return;
+        }
+
+        if (users.find(user => user.username === username)) {
+            showError('registerError', 'Este nombre de usuario ya está en uso');
             return;
         }
 
         // Crear nuevo usuario
         const newUser = {
-            name: name,
-            email: email,
-            employeeId: employeeId,
-            department: department,
+            phone: phone,
+            username: username,
+            referralCode: referralCode.toUpperCase() || null,
             password: password,
             registrationDate: new Date().toLocaleDateString()
         };
@@ -579,7 +718,11 @@
         users.push(newUser);
         currentUser = newUser;
 
-        showSuccess('registerSuccess', '¡Registro exitoso! Bienvenido al equipo Nordex. Redirigiendo...');
+        const referralMessage = referralCode ? 
+            ' ¡Código de referido aplicado exitosamente!' : '';
+        
+        showSuccess('registerSuccess', 
+            `¡Registro exitoso! Bienvenido a Nordex Colombia.${referralMessage} Redirigiendo...`);
         
         // Simular redirección a home.html
         setTimeout(() => {
@@ -592,12 +735,12 @@
         e.preventDefault();
         clearMessages();
 
-        const email = document.getElementById('loginEmail').value.trim();
+        const phone = document.getElementById('loginPhone').value.trim();
         const password = document.getElementById('loginPassword').value;
 
         // Validaciones
-        if (!isValidNordexEmail(email)) {
-            showError('loginError', 'Debes usar tu email corporativo de Nordex (@nordex.com)');
+        if (!isValidColombianPhone(phone)) {
+            showError('loginError', 'El número debe ser un celular colombiano válido');
             return;
         }
 
@@ -607,15 +750,15 @@
         }
 
         // Buscar usuario
-        const user = users.find(u => u.email === email && u.password === password);
+        const user = users.find(u => u.phone === phone && u.password === password);
 
         if (!user) {
-            showError('loginError', 'Credenciales incorrectas. Verifica tu email y contraseña.');
+            showError('loginError', 'Número de teléfono o contraseña incorrectos');
             return;
         }
 
         currentUser = user;
-        showSuccess('loginSuccess', `¡Bienvenido de vuelta, ${user.name}! Accediendo al sistema...`);
+        showSuccess('loginSuccess', `¡Bienvenido de vuelta, ${user.username}! Accediendo al portal...`);
 
         // Simular redirección a home.html
         setTimeout(() => {
@@ -633,25 +776,38 @@
         // Limpiar formularios
         document.getElementById('loginFormElement').reset();
         document.getElementById('registerFormElement').reset();
+        document.getElementById('captchaInput').value = '';
+        refreshCaptcha();
     }
 
-    // Datos de prueba - Empleado demo de Nordex
+    // Datos de prueba - Clientes demo de Nordex Colombia
     users.push({
-        name: 'Ana García Rodríguez',
-        email: 'ana.garcia@nordex.com',
-        employeeId: 'NX-2024-001',
-        department: 'engineering',
-        password: 'nordex2024',
-        registrationDate: new Date().toLocaleDateString()
+        phone: '3001234567',
+        username: 'ana_garcia',
+        referralCode: 'NORDEX2024',
+        password: 'colombia123',
+        registrationDate: '10/06/2024'
     });
 
     users.push({
-        name: 'Carlos Mendoza López',
-        email: 'carlos.mendoza@nordex.com',
-        employeeId: 'NX-2024-002',
-        department: 'maintenance',
+        phone: '3109876543',
+        username: 'carlos_lopez',
+        referralCode: null,
         password: 'windpower',
-        registrationDate: new Date().toLocaleDateString()
+        registrationDate: '12/06/2024'
+    });
+
+    // Formatear entrada del teléfono
+    document.getElementById('registerPhone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 10) value = value.slice(0, 10);
+        e.target.value = value;
+    });
+
+    document.getElementById('loginPhone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 10) value = value.slice(0, 10);
+        e.target.value = value;
     });
 </script>
 ```
